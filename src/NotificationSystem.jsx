@@ -143,7 +143,11 @@ var NotificationSystem = createReactClass({
       }
     }
 
-    notifications.push(_notification);
+    if (notification.addToFront) {
+      notifications = [_notification].concat(notifications);
+    } else {
+      notifications.push(_notification);
+    }
 
     if (typeof _notification.onAdd === 'function') {
       notification.onAdd(_notification);
